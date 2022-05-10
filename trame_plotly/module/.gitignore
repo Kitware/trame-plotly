@@ -1,0 +1,8 @@
+serve
+serve/demo.html
+serve/trame-plotly.common.js
+serve/trame-plotly.common.js.map
+serve/trame-plotly.umd.js
+serve/trame-plotly.umd.js.map
+# serve/trame-plotly.umd.min.js
+serve/trame-plotly.umd.min.js.map
