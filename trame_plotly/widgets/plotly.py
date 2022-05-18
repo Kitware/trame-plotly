@@ -101,3 +101,8 @@ class Figure(AbstractElement):
         Serialize plotly figure
         """
         return ENCODER(chart.to_plotly_json())
+
+
+__all__ = [
+    "Figure",
+]
