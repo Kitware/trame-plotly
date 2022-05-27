@@ -65,6 +65,7 @@ class Figure(AbstractElement):
     :param transition_interrupted:
     :param unhover:
     """
+
     _next_id = 0
 
     def __init__(self, figure=None, **kwargs):

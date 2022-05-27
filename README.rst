@@ -6,7 +6,7 @@ trame-plotly extend trame **widgets** with components that can interface with Pl
 Plotly integration in trame allow you to create rich visualization by leveraging their `Python <https://plotly.com/python/>`_ or `JavaScript <https://plotly.com/javascript/>`_ interface.
 The JavaScript version is exposed via `Vue.plotly <https://david-desmaisons.github.io/vue-plotly/>`_ within trame.widgets.plotly.Plotly class definition.
 
-This package is not supposed to be used by iteself but rather should come as a dependency of **trame**.
+This package is not supposed to be used by itself but rather should come as a dependency of **trame**.
 For any specificity, please refer to `the trame documentation <https://kitware.github.io/trame/>`_.
 
 
