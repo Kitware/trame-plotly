@@ -1,6 +1,10 @@
 Plotly widget for trame
 ===========================================================================
 
+.. image:: https://github.com/Kitware/trame-plotly/actions/workflows/test_and_release.yml/badge.svg
+    :target: https://github.com/Kitware/trame-plotly/actions/workflows/test_and_release.yml
+    :alt: Test and Release
+
 trame-plotly extend trame **widgets** with components that can interface with Plotly to display their charts.
 
 Plotly integration in trame allow you to create rich visualization by leveraging their `Python <https://plotly.com/python/>`_ or `JavaScript <https://plotly.com/javascript/>`_ interface.
