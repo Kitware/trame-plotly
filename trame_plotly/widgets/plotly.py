@@ -68,9 +68,12 @@ class Figure(AbstractElement):
 
     _next_id = 0
 
-    def __init__(self, figure=None, **kwargs):
-        Figure._next_id += 1
-        self.__figure_key = f"trame__plotly_{Figure._next_id}"
+    def __init__(self, figure=None, state_variable_name=None, **kwargs):
+        if state_variable_name is None:
+            Figure._next_id += 1
+            state_variable_name = f"trame__plotly_{Figure._next_id}"
+
+        self.__figure_key = state_variable_name
         super().__init__(
             "vue-plotly",
             data=(f"{self.__figure_key}.data",),
@@ -81,7 +84,7 @@ class Figure(AbstractElement):
             self.server.enable_module(module)
 
         self.__figure_data = figure
-        self.server.state[self.__figure_key] = {"data": [], "layout": {}}
+        self.server.state.setdefault(self.__figure_key, {"data": [], "layout": {}})
         self._attr_names += [
             "data",
             "layout",
