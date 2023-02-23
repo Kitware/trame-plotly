@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.1 (2023-02-23)
+### Fix
+* **version:** Add __version__ ([`58100dd`](https://github.com/Kitware/trame-plotly/commit/58100dd11a4c601e5b1efe7105f0489b7b5d865e))
+
 ## v2.1.0 (2022-11-18)
 ### Feature
 * **figure:** Add ability to set state variable name ([`e09a072`](https://github.com/Kitware/trame-plotly/commit/e09a072347e3b03234d90028a826634cd334a1bf))
