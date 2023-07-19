@@ -1,34 +1,45 @@
 {
-    "name": "trame-plotly",
-    "version": "2.0.0",
-    "description": "Plotly widget for trame",
-    "private": true,
-    "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build --target lib --name VuePlotly --filename trame-plotly src/use.js",
-        "lint": "vue-cli-service lint"
-    },
-    "dependencies": {
-        "core-js": "^3.20.3",
-        "vue": "^2.6.14",
-        "vue-plotly": "^1.1.0"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.12.16",
-        "@babel/eslint-parser": "^7.12.16",
-        "@vue/cli-plugin-babel": "~5.0.4",
-        "@vue/cli-plugin-eslint": "~5.0.0",
-        "@vue/cli-service": "~5.0.4",
-        "eslint": "^7.32.0",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-prettier": "^4.0.0",
-        "eslint-plugin-vue": "^8.0.3",
-        "prettier": "^2.4.1",
-        "vue-template-compiler": "^2.6.14"
-    },
-    "keywords": [
-        "Kitware",
-        "trame"
-    ],
-    "license": "MIT"
+  "name": "trame-plotly",
+  "version": "0.0.0",
+  "description": "Vue component to expose plotly.js",
+  "repository": "Kitware/trame-plotly",
+  "main": "./dist/trame-plotly.umd.js",
+  "unpkg": "./dist/trame-plotly.umd.js",
+  "module": "./dist/trame-plotly.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/trame-plotly.mjs",
+      "require": "./dist/trame-plotly.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --emptyOutDir",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore --ignore-pattern public",
+    "semantic-release": "semantic-release"
+  },
+  "dependencies": {
+    "plotly.js-dist-min": "^2.24.3"
+  },
+  "peerDependencies": {
+    "vue": "^2.7.0 || >=3.0.0"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.33.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "prettier": "^2.7.1",
+    "semantic-release": "19.0.2",
+    "vite": "^4.1.0",
+    "vue": "^3.0.0"
+  },
+  "author": "Kitware Inc",
+  "license": "MIT",
+  "files": [
+    "dist/*",
+    "src/*",
+    "*.json",
+    "*.js"
+  ]
 }

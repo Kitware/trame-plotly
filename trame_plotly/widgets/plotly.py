@@ -75,7 +75,7 @@ class Figure(AbstractElement):
 
         self.__figure_key = state_variable_name
         super().__init__(
-            "vue-plotly",
+            "trame-plotly",
             data=(f"{self.__figure_key}.data",),
             layout=(f"{self.__figure_key}.layout",),
             **kwargs,

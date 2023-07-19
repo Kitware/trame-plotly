@@ -8,8 +8,8 @@ serve = {"__trame_plotly": serve_path}
 
 # List of JS files to load (usually from the serve path above)
 scripts = [
-    "__trame_plotly/trame-plotly.umd.min.js",
+    "__trame_plotly/trame-plotly.umd.js",
 ]
 
 # List of Vue plugins to install/load
-vue_use = ["VuePlotly"]
+vue_use = ["trame_plotly"]
