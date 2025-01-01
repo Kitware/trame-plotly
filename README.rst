@@ -1,4 +1,6 @@
-Plotly widget for trame
+.. |pypi_download| image:: https://img.shields.io/pypi/dm/trame-plotly
+
+Plotly widget for trame |pypi_download|
 ===========================================================================
 
 .. image:: https://github.com/Kitware/trame-plotly/actions/workflows/test_and_release.yml/badge.svg
