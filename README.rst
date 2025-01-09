@@ -164,3 +164,9 @@ Enjoying trame?
 -----------------------------------------------------------
 
 Share your experience `with a testimonial <https://github.com/Kitware/trame/issues/18>`_ or `with a brand approval <https://github.com/Kitware/trame/issues/19>`_.
+
+
+JavaScript dependency
+-----------------------------------------------------------
+
+This Python package bundle the ``plotly.js-dist-min@2.24.3`` JavaScript library. If you would like us to upgrade it, `please reach out <https://www.kitware.com/trame/>`_.
