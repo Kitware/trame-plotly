@@ -19,7 +19,7 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "plotly.js-dist-min": "^2.24.3"
+    "plotly.js-dist-min": "^3.0.0"
   },
   "peerDependencies": {
     "vue": "^2.7.0 || >=3.0.0"
