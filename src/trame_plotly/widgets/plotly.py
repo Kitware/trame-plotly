@@ -1,4 +1,5 @@
 from trame_client.widgets.core import AbstractElement
+
 from trame_plotly import module
 
 try:
@@ -131,7 +132,7 @@ class Figure(AbstractElement):
         ]
         self.update()
 
-    def update(self, plotly_fig=None, **kwargs):
+    def update(self, plotly_fig=None, **_):
         """
         Update the Plotly Figure with new content
 
@@ -151,7 +152,7 @@ class Figure(AbstractElement):
         return self.__figure_key
 
     @staticmethod
-    def to_data(chart, **kwargs):
+    def to_data(chart, **_):
         """
         Serialize plotly figure
         """

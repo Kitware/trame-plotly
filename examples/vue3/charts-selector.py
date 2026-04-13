@@ -1,9 +1,9 @@
-import plotly.graph_objects as go
 import plotly.express as px
-
+import plotly.graph_objects as go
 from trame.app import get_server
 from trame.ui.vuetify3 import SinglePageLayout
-from trame.widgets import vuetify3, plotly
+
+from trame.widgets import plotly, vuetify3
 
 # -----------------------------------------------------------------------------
 # Trame setup
@@ -78,7 +78,7 @@ def on_event(type, e):
 
 
 @state.change("active_plot")
-def update_plot(active_plot, **kwargs):
+def update_plot(active_plot, **_):
     ctrl.figure_update(PLOTS[active_plot]())
 
 
@@ -100,20 +100,18 @@ with SinglePageLayout(server) as layout:
             dense=True,
         )
 
-    with layout.content:
-        with vuetify3.VContainer(fluid=True):
-            with vuetify3.VRow(dense=True):
-                vuetify3.VSpacer()
-                figure = plotly.Figure(
-                    display_logo=False,
-                    display_mode_bar="true",
-                    # selected=(on_event, "['selected', utils.safe($event)]"),
-                    # hover=(on_event, "['hover', utils.safe($event)]"),
-                    # selecting=(on_event, "['selecting', $event]"),
-                    # unhover=(on_event, "['unhover', $event]"),
-                )
-                ctrl.figure_update = figure.update
-                vuetify3.VSpacer()
+    with layout.content, vuetify3.VContainer(fluid=True), vuetify3.VRow(dense=True):
+        vuetify3.VSpacer()
+        figure = plotly.Figure(
+            display_logo=False,
+            display_mode_bar="true",
+            # selected=(on_event, "['selected', utils.safe($event)]"),
+            # hover=(on_event, "['hover', utils.safe($event)]"),
+            # selecting=(on_event, "['selecting', $event]"),
+            # unhover=(on_event, "['unhover', $event]"),
+        )
+        ctrl.figure_update = figure.update
+        vuetify3.VSpacer()
 
 # -----------------------------------------------------------------------------
 # Main

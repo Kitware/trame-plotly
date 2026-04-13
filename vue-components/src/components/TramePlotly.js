@@ -22,7 +22,7 @@ function cached(fn) {
 
 const regex = /-(\w)/g;
 const camelize = cached((str) =>
-  str.replace(regex, (_, c) => (c ? c.toUpperCase() : ""))
+  str.replace(regex, (_, c) => (c ? c.toUpperCase() : "")),
 );
 
 // ----------------------------------------------------------------------------
@@ -136,7 +136,7 @@ export default {
       const allOptions = Object.assign(
         getPrintOptions(),
         { filename },
-        options.value
+        options.value,
       );
       return Plotly.downloadImage(elem.value, allOptions);
     }
@@ -169,7 +169,7 @@ export default {
       () => props.data,
       async () => {
         await schedule(true);
-      }
+      },
     );
 
     watch(options, async (newValue, oldValue) => {
@@ -183,7 +183,7 @@ export default {
       async (layout) => {
         innerLayout.value = { ...layout };
         await schedule(false);
-      }
+      },
     );
 
     // --------------

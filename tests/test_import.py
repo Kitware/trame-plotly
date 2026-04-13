@@ -1,2 +1,2 @@
 def test_import():
-    from trame.widgets.plotly import Figure  # noqa: F401
+    from trame.widgets.plotly import Figure  # noqa: F401 PLC0415

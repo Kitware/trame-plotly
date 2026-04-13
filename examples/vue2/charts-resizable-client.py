@@ -1,12 +1,11 @@
-import plotly.graph_objects as go
-import plotly.figure_factory as ff
-
-from trame.app import get_server
-from trame.ui.vuetify import SinglePageLayout
-from trame.widgets import vuetify, plotly
-
 import numpy as np
 import pandas as pd
+import plotly.figure_factory as ff
+import plotly.graph_objects as go
+from trame.app import get_server
+from trame.ui.vuetify import SinglePageLayout
+
+from trame.widgets import plotly, vuetify
 
 # -----------------------------------------------------------------------------
 # Trame setup
@@ -42,7 +41,7 @@ def clean_data(data_in):
     input = {'key': ['a b c']}
     output = [key, [a, b, c]]
     """
-    key = list(data_in.keys())[0]
+    key = next(iter(data_in.keys()))
     data_out = [key]
     for i in data_in[key]:
         data_out.append(list(map(float, i.split(" "))))
@@ -50,7 +49,7 @@ def clean_data(data_in):
     return data_out
 
 
-def create_ternary_fig(**kwargs):
+def create_ternary_fig(**_):
     contour_dict = contour_raw_data["Data"]
 
     # Defining a colormap:
@@ -89,19 +88,19 @@ def create_ternary_fig(**kwargs):
                 b=b,
                 c=c,
                 mode="lines",
-                line=dict(color="#444", shape="spline"),
+                line={"color": "#444", "shape": "spline"},
                 fill="toself",
                 fillcolor=colors_iterator.__next__(),
             )
         )
 
     fig.update_layout(
-        margin=dict(l=50, r=50, t=50, b=50),
+        margin={"l": 50, "r": 50, "t": 50, "b": 50},
     )
     return fig
 
 
-def create_polar_fig(**kwargs):
+def create_polar_fig(**_):
     fig = go.Figure()
     fig.add_trace(
         go.Scatterpolar(
@@ -133,13 +132,13 @@ def create_polar_fig(**kwargs):
 
     fig.update_layout(
         # title = 'Mic Patterns',
-        margin=dict(l=20, r=20, t=20, b=20),
+        margin={"l": 20, "r": 20, "t": 20, "b": 20},
         showlegend=False,
     )
     return fig
 
 
-def create_streamline_fig(**kwargs):
+def create_streamline_fig(**_):
     x = np.linspace(-3, 3, 100)
     y = np.linspace(-3, 3, 100)
     Y, X = np.meshgrid(x, y)
@@ -156,13 +155,13 @@ def create_streamline_fig(**kwargs):
     )
     fig.update_layout(
         # title = 'Mic Patterns',
-        margin=dict(l=20, r=20, t=10, b=10),
+        margin={"l": 20, "r": 20, "t": 10, "b": 10},
         showlegend=False,
     )
     return fig
 
 
-def create_contour_fig(**kwargs):
+def create_contour_fig(**_):
     fig = go.Figure(
         data=go.Contour(
             z=[
@@ -187,7 +186,7 @@ def create_contour_fig(**kwargs):
     )
     fig.update_layout(
         # title = 'Mic Patterns',
-        margin=dict(l=20, r=20, t=10, b=10),
+        margin={"l": 20, "r": 20, "t": 10, "b": 10},
         showlegend=False,
     )
     return fig
@@ -203,30 +202,29 @@ state.trame__title = "Charts"
 with SinglePageLayout(server) as layout:
     layout.title.set_text("Many charts")
 
-    with layout.content:
-        with vuetify.VContainer(fluid=True, classes="fill-height"):
-            with vuetify.VRow(style="height: 50%;"):
-                with vuetify.VCol():
-                    plotly.Figure(
-                        create_polar_fig(),
-                        display_mode_bar=("false",),
-                    )
-                with vuetify.VCol():
-                    plotly.Figure(
-                        create_ternary_fig(),
-                        display_mode_bar=("false",),
-                    )
-            with vuetify.VRow(style="height: 50%;"):
-                with vuetify.VCol():
-                    plotly.Figure(
-                        create_contour_fig(),
-                        display_mode_bar=("false",),
-                    )
-                with vuetify.VCol():
-                    plotly.Figure(
-                        create_streamline_fig(),
-                        display_mode_bar=("false",),
-                    )
+    with layout.content, vuetify.VContainer(fluid=True, classes="fill-height"):
+        with vuetify.VRow(style="height: 50%;"):
+            with vuetify.VCol():
+                plotly.Figure(
+                    create_polar_fig(),
+                    display_mode_bar=("false",),
+                )
+            with vuetify.VCol():
+                plotly.Figure(
+                    create_ternary_fig(),
+                    display_mode_bar=("false",),
+                )
+        with vuetify.VRow(style="height: 50%;"):
+            with vuetify.VCol():
+                plotly.Figure(
+                    create_contour_fig(),
+                    display_mode_bar=("false",),
+                )
+            with vuetify.VCol():
+                plotly.Figure(
+                    create_streamline_fig(),
+                    display_mode_bar=("false",),
+                )
 
 # -----------------------------------------------------------------------------
 # Main

@@ -1,12 +1,11 @@
-import plotly.graph_objects as go
-import plotly.figure_factory as ff
-
-from trame.app import get_server
-from trame.ui.vuetify3 import SinglePageLayout
-from trame.widgets import vuetify3, plotly, trame
-
 import numpy as np
 import pandas as pd
+import plotly.figure_factory as ff
+import plotly.graph_objects as go
+from trame.app import get_server
+from trame.ui.vuetify3 import SinglePageLayout
+
+from trame.widgets import plotly, trame, vuetify3
 
 # -----------------------------------------------------------------------------
 # Trame setup
@@ -42,7 +41,7 @@ def clean_data(data_in):
     input = {'key': ['a b c']}
     output = [key, [a, b, c]]
     """
-    key = list(data_in.keys())[0]
+    key = next(iter(data_in.keys()))
     data_out = [key]
     for i in data_in[key]:
         data_out.append(list(map(float, i.split(" "))))
@@ -50,7 +49,7 @@ def clean_data(data_in):
     return data_out
 
 
-def create_ternary_fig(width=300, height=300, **kwargs):
+def create_ternary_fig(width=300, height=300, **_):
     contour_dict = contour_raw_data["Data"]
 
     # Defining a colormap:
@@ -103,7 +102,7 @@ def create_ternary_fig(width=300, height=300, **kwargs):
     return fig
 
 
-def create_polar_fig(width=300, height=300, **kwargs):
+def create_polar_fig(width=300, height=300, **_):
     fig = go.Figure()
     fig.add_trace(
         go.Scatterpolar(
@@ -143,7 +142,7 @@ def create_polar_fig(width=300, height=300, **kwargs):
     return fig
 
 
-def create_streamline_fig(width=100, height=100, **kwargs):
+def create_streamline_fig(width=100, height=100, **_):
     x = np.linspace(-3, 3, 100)
     y = np.linspace(-3, 3, 100)
     Y, X = np.meshgrid(x, y)
@@ -168,7 +167,7 @@ def create_streamline_fig(width=100, height=100, **kwargs):
     return fig
 
 
-def create_contour_fig(width=100, height=100, **kwargs):
+def create_contour_fig(width=100, height=100, **_):
     fig = go.Figure(
         data=go.Contour(
             z=[
@@ -193,7 +192,7 @@ def create_contour_fig(width=100, height=100, **kwargs):
     )
     fig.update_layout(
         # title = 'Mic Patterns',
-        margin=dict(l=20, r=20, t=10, b=10),
+        margin={"l": 20, "r": 20, "t": 10, "b": 10},
         showlegend=False,
         width=width,
         height=height,
@@ -207,7 +206,7 @@ def create_contour_fig(width=100, height=100, **kwargs):
 
 
 @state.change("contour_size")
-def update_contour_size(contour_size, **kwargs):
+def update_contour_size(contour_size, **_):
     if contour_size is None:
         return
 
@@ -215,7 +214,7 @@ def update_contour_size(contour_size, **kwargs):
 
 
 @state.change("stream_size")
-def update_stream_size(stream_size, **kwargs):
+def update_stream_size(stream_size, **_):
     if stream_size is None:
         return
 
@@ -223,7 +222,7 @@ def update_stream_size(stream_size, **kwargs):
 
 
 @state.change("polar_size")
-def update_polar_size(polar_size, **kwargs):
+def update_polar_size(polar_size, **_):
     if polar_size is None:
         return
 
@@ -231,7 +230,7 @@ def update_polar_size(polar_size, **kwargs):
 
 
 @state.change("ternary_size")
-def update_ternary_size(ternary_size, **kwargs):
+def update_ternary_size(ternary_size, **_):
     if ternary_size is None:
         return
 
@@ -248,30 +247,26 @@ state.trame__title = "Charts"
 with SinglePageLayout(server) as layout:
     layout.title.set_text("Many charts")
 
-    with layout.content:
-        with vuetify3.VContainer(fluid=True, classes="fill-height"):
-            with vuetify3.VRow():
-                with vuetify3.VCol(style="height: 50%;"):
-                    with trame.SizeObserver("polar_size"):
-                        ctrl.update_polar = plotly.Figure(
-                            display_mode_bar=("false",),
-                        ).update
-                with vuetify3.VCol():
-                    with trame.SizeObserver("ternary_size"):
-                        ctrl.update_ternary = plotly.Figure(
-                            display_mode_bar=("false",),
-                        ).update
-            with vuetify3.VRow(style="height: 50%;"):
-                with vuetify3.VCol():
-                    with trame.SizeObserver("contour_size"):
-                        ctrl.update_contour = plotly.Figure(
-                            display_mode_bar=("false",),
-                        ).update
-                with vuetify3.VCol():
-                    with trame.SizeObserver("stream_size"):
-                        ctrl.update_stream = plotly.Figure(
-                            display_mode_bar=("false",),
-                        ).update
+    with layout.content, vuetify3.VContainer(fluid=True, classes="fill-height"):
+        with vuetify3.VRow():
+            with vuetify3.VCol(style="height: 50%;"):
+                with trame.SizeObserver("polar_size"):
+                    ctrl.update_polar = plotly.Figure(
+                        display_mode_bar=("false",),
+                    ).update
+            with vuetify3.VCol(), trame.SizeObserver("ternary_size"):
+                ctrl.update_ternary = plotly.Figure(
+                    display_mode_bar=("false",),
+                ).update
+        with vuetify3.VRow(style="height: 50%;"):
+            with vuetify3.VCol(), trame.SizeObserver("contour_size"):
+                ctrl.update_contour = plotly.Figure(
+                    display_mode_bar=("false",),
+                ).update
+            with vuetify3.VCol(), trame.SizeObserver("stream_size"):
+                ctrl.update_stream = plotly.Figure(
+                    display_mode_bar=("false",),
+                ).update
 
 # -----------------------------------------------------------------------------
 # Main

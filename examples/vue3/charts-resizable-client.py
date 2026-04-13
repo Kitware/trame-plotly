@@ -1,12 +1,11 @@
-import plotly.graph_objects as go
-import plotly.figure_factory as ff
-
-from trame.app import get_server
-from trame.ui.vuetify3 import SinglePageLayout
-from trame.widgets import vuetify3, plotly
-
 import numpy as np
 import pandas as pd
+import plotly.figure_factory as ff
+import plotly.graph_objects as go
+from trame.app import get_server
+from trame.ui.vuetify3 import SinglePageLayout
+
+from trame.widgets import plotly, vuetify3
 
 # -----------------------------------------------------------------------------
 # Trame setup
@@ -42,7 +41,7 @@ def clean_data(data_in):
     input = {'key': ['a b c']}
     output = [key, [a, b, c]]
     """
-    key = list(data_in.keys())[0]
+    key = next(iter(data_in.keys()))
     data_out = [key]
     for i in data_in[key]:
         data_out.append(list(map(float, i.split(" "))))
@@ -50,7 +49,7 @@ def clean_data(data_in):
     return data_out
 
 
-def create_ternary_fig(**kwargs):
+def create_ternary_fig(**_):
     contour_dict = contour_raw_data["Data"]
 
     # Defining a colormap:
@@ -101,7 +100,7 @@ def create_ternary_fig(**kwargs):
     return fig
 
 
-def create_polar_fig(**kwargs):
+def create_polar_fig(**_):
     fig = go.Figure()
     fig.add_trace(
         go.Scatterpolar(
@@ -139,7 +138,7 @@ def create_polar_fig(**kwargs):
     return fig
 
 
-def create_streamline_fig(**kwargs):
+def create_streamline_fig(**_):
     x = np.linspace(-3, 3, 100)
     y = np.linspace(-3, 3, 100)
     Y, X = np.meshgrid(x, y)
@@ -162,7 +161,7 @@ def create_streamline_fig(**kwargs):
     return fig
 
 
-def create_contour_fig(**kwargs):
+def create_contour_fig(**_):
     fig = go.Figure(
         data=go.Contour(
             z=[
@@ -203,31 +202,30 @@ state.trame__title = "Charts"
 with SinglePageLayout(server) as layout:
     layout.title.set_text("Many charts")
 
-    with layout.content:
-        with vuetify3.VContainer(fluid=True, classes="fill-height"):
-            with vuetify3.VCol(classes="fill-height"):
-                with vuetify3.VRow(style="height: 50%;"):
-                    with vuetify3.VCol():
-                        plotly.Figure(
-                            create_polar_fig(),
-                            display_mode_bar=("false",),
-                        )
-                    with vuetify3.VCol():
-                        plotly.Figure(
-                            create_ternary_fig(),
-                            display_mode_bar=("false",),
-                        )
-                with vuetify3.VRow(style="height: 50%;"):
-                    with vuetify3.VCol():
-                        plotly.Figure(
-                            create_contour_fig(),
-                            display_mode_bar=("false",),
-                        )
-                    with vuetify3.VCol():
-                        plotly.Figure(
-                            create_streamline_fig(),
-                            display_mode_bar=("false",),
-                        )
+    with layout.content, vuetify3.VContainer(fluid=True, classes="fill-height"):
+        with vuetify3.VCol(classes="fill-height"):
+            with vuetify3.VRow(style="height: 50%;"):
+                with vuetify3.VCol():
+                    plotly.Figure(
+                        create_polar_fig(),
+                        display_mode_bar=("false",),
+                    )
+                with vuetify3.VCol():
+                    plotly.Figure(
+                        create_ternary_fig(),
+                        display_mode_bar=("false",),
+                    )
+            with vuetify3.VRow(style="height: 50%;"):
+                with vuetify3.VCol():
+                    plotly.Figure(
+                        create_contour_fig(),
+                        display_mode_bar=("false",),
+                    )
+                with vuetify3.VCol():
+                    plotly.Figure(
+                        create_streamline_fig(),
+                        display_mode_bar=("false",),
+                    )
 
 # -----------------------------------------------------------------------------
 # Main

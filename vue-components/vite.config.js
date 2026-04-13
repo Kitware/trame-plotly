@@ -16,7 +16,7 @@ export default {
         },
       },
     },
-    outDir: "../trame_plotly/module/serve",
+    outDir: "../src/trame_plotly/module/serve",
     assetsDir: ".",
   },
 };

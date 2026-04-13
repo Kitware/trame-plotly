@@ -151,6 +151,33 @@ trame-plotly is made available under the MIT License. For more details, see `LIC
 This license has been chosen to match the one use by `Plotly <https://github.com/plotly/plotly.py/blob/master/LICENSE.txt>`_ and `vue-plotly <https://github.com/David-Desmaisons/vue-plotly/blob/master/LICENSE>`_ which are instrumental for making that library possible.
 
 
+Development
+----------------------------------------
+
+Build and install the Vue components
+
+.. code-block:: console
+
+    cd vue-components
+    npm i
+    npm run build
+    cd -
+
+Install the library
+
+.. code-block:: console
+
+    # Create venv and install all dependencies
+    uv sync --all-extras --dev
+
+    # Activate environment
+    source .venv/bin/activate
+
+    # Install commit analysis
+    pre-commit install
+    pre-commit install --hook-type commit-msg
+
+
 Community
 -----------------------------------------------------------
 
