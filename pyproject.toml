@@ -1,6 +1,6 @@
 [project]
 name = "trame-plotly"
-version = "3.1.0"
+version = "3.1.1"
 authors = [
   { name = "Sebastien Jourdain", email = "sebastien.jourdain@kitware.com" },
 ]
