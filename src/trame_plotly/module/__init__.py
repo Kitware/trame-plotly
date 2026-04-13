@@ -1,14 +1,16 @@
 from pathlib import Path
 
+from trame_plotly import __version__ as version
+
 # Compute local path to serve
 serve_path = str(Path(__file__).with_name("serve").resolve())
 
 # Serve directory for JS/CSS files
-serve = {"__trame_plotly": serve_path}
+serve = {f"__trame_plotly_{version}": serve_path}
 
 # List of JS files to load (usually from the serve path above)
 scripts = [
-    "__trame_plotly/trame-plotly.umd.js",
+    f"__trame_plotly_{version}/trame-plotly.umd.js",
 ]
 
 # List of Vue plugins to install/load
