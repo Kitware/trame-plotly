@@ -15,6 +15,9 @@ The JavaScript version is exposed via `Vue.plotly <https://david-desmaisons.gith
 This package is not supposed to be used by itself but rather should come as a dependency of **trame**.
 For any specificity, please refer to `the trame documentation <https://kitware.github.io/trame/>`_.
 
+.. image:: https://raw.githubusercontent.com/Kitware/trame-plotly/master/trame-plotly.png
+    :target: https://github.com/Kitware/trame/blob/master/examples/05_charts/Plotly/drag-and-drop.py
+    :alt: Sample application
 
 Installing
 -----------------------------------------------------------
@@ -23,7 +26,7 @@ trame-plotly can be installed with `pip <https://pypi.org/project/trame-plotly/>
 
 .. code-block:: bash
 
-    pip install --upgrade trame-plotly
+    pip install trame-plotly
 
 Usage
 -----------------------------------------------------------
