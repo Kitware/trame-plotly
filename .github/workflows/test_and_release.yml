@@ -86,7 +86,13 @@ jobs:
     needs: [pre-commit, pytest, test-npm-build]
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
-
+    permissions:
+      id-token: write
+      attestations: write
+      contents: write
+    environment:
+      name: pypi
+      url: https://pypi.org/p/trame-plotly
     steps:
       - name: Checkout
         uses: actions/checkout@v6
