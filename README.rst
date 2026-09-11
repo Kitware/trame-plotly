@@ -1,4 +1,4 @@
-.. |pypi_download| image:: https://img.shields.io/pypi/dm/trame-plotly
+.. |pypi_download| image:: https://kitware.github.io/trame/downloads/trame-plotly.svg
 
 Plotly widget for trame |pypi_download|
 ===========================================================================
